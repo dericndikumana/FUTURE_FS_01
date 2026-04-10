@@ -42,7 +42,7 @@ Visit the portfolio: [https://dericndikumana.github.io/FUTURE_FS_01](https://der
 FUTURE_FS_01/
 ├── index.html          # Main portfolio file (all-in-one)
 ├── README.md          # This file
-└── me.jpeg            # Profile/avatar image
+└── (optional) me.jpeg  # Profile/avatar image (recommended)
 ```
 
 ## 🎯 Sections

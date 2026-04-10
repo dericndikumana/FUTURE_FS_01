@@ -6,6 +6,18 @@
   <meta name="description" content="Deric Ndikumana — Full Stack Web Developer Portfolio. Interning at Future Interns, building clean and functional websites from Kigali, Rwanda." />
   <meta name="keywords" content="Deric Ndikumana, Full Stack Developer, Web Developer, Rwanda, Future Interns, Portfolio, HTML, CSS, JavaScript, Tailwind, Node.js, MongoDB" />
   <meta name="author" content="Ndikumana Deric — CIN: FIT/MAR26/FS14315" />
+  <link rel="canonical" href="https://dericndikumana.github.io/FUTURE_FS_01/" />
+
+  <!-- Open Graph / Twitter (better LinkedIn previews) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Deric Ndikumana | Full Stack Developer" />
+  <meta property="og:description" content="Full Stack Web Developer Portfolio — skills, projects, internship journey, and contact." />
+  <meta property="og:url" content="https://dericndikumana.github.io/FUTURE_FS_01/" />
+  <meta property="og:image" content="https://dericndikumana.github.io/FUTURE_FS_01/me.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Deric Ndikumana | Full Stack Developer" />
+  <meta name="twitter:description" content="Full Stack Web Developer Portfolio — skills, projects, internship journey, and contact." />
+  <meta name="twitter:image" content="https://dericndikumana.github.io/FUTURE_FS_01/me.jpeg" />
   <title>Deric Ndikumana | Full Stack Developer</title>
   <!-- TAILWIND CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -151,7 +163,7 @@
       <button onclick="toggleTheme()" title="Toggle theme" class="w-9 h-9 flex items-center justify-center rounded-full dark:bg-[#11111f] bg-slate-100 dark:border dark:border-purple-500/25 border border-slate-200 dark:text-slate-400 text-slate-500 hover:text-purple-400 transition-all duration-300">
         <i id="theme-icon" class="fas fa-sun text-sm"></i>
       </button>
-      <button onclick="toggleMob()" class="md:hidden flex flex-col gap-[5px]" aria-label="Menu">
+      <button onclick="toggleMob()" class="md:hidden flex flex-col gap-[5px]" aria-label="Menu" aria-controls="mob-menu" aria-expanded="false">
         <span class="w-6 h-0.5 bg-purple-400 block"></span>
         <span class="w-6 h-0.5 bg-purple-400 block"></span>
         <span class="w-6 h-0.5 bg-purple-400 block"></span>
@@ -213,6 +225,12 @@
         <div class="relative reveal">
           <div class="w-full max-w-[260px] sm:max-w-[280px] aspect-square dark:bg-[#11111f] bg-slate-100 rounded-2xl dark:border border border-purple-500/20 flex items-center justify-center text-[7rem] relative overflow-hidden mx-auto md:mx-0">
             <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/5"></div> <img src="me.jpeg" alt="my profile picture" class="w-full h-full object-cover">
+            <div data-avatar-fallback class="hidden relative z-10 w-full h-full flex items-center justify-center">
+              <div class="text-center">
+                <div class="font-extrabold tracking-tight text-5xl sm:text-6xl dark:text-slate-100 text-slate-900">DN</div>
+                <div class="font-mono text-xs dark:text-slate-500 text-slate-500 uppercase tracking-[0.22em] mt-2">Profile</div>
+              </div>
+            </div>
             <div class="ac tl"></div><div class="ac tr"></div><div class="ac bl"></div><div class="ac br"></div>
           </div>
           <div class="absolute -bottom-4 -right-1 sm:-right-4 dark:bg-[#16162a] bg-white dark:border border border-purple-500/20 rounded-xl px-3 py-2 font-mono text-xs shadow-lg">
@@ -306,7 +324,12 @@
       document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; curEl.style.left = (mx - 6) + 'px'; curEl.style.top = (my - 6) + 'px'; });
       (function anim() { fx += (mx - fx) * 0.12; fy += (my - fy) * 0.12; cfEl.style.left = (fx - 18) + 'px'; cfEl.style.top = (fy - 18) + 'px'; requestAnimationFrame(anim); })();
     }
-    function toggleMob() { document.getElementById('mob-menu').classList.toggle('open'); }
+    function toggleMob() {
+      const menu = document.getElementById('mob-menu');
+      const btn = document.querySelector('button[aria-controls="mob-menu"]');
+      const isOpen = menu.classList.toggle('open');
+      if (btn) btn.setAttribute('aria-expanded', String(isOpen));
+    }
     // Scroll reveal
     const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
@@ -343,6 +366,18 @@
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
       btn.disabled = false;
     });
+
+    // Avatar fallback when image missing
+    (function () {
+      const img = document.querySelector('img[src="me.jpeg"]');
+      if (!img) return;
+      img.alt = 'Deric Ndikumana portrait';
+      img.addEventListener('error', () => {
+        img.remove();
+        const fallback = document.querySelector('[data-avatar-fallback]');
+        if (fallback) fallback.classList.remove('hidden');
+      });
+    })();
   </script>
 </body>
 </html>
