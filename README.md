@@ -4,7 +4,7 @@ A modern, responsive, dark-mode enabled portfolio website showcasing my skills, 
 
 ## 🌐 Live Preview
 
-Visit the portfolio: [https://dericndikumana.github.io/FUTURE_FS_01](https://dericndikumana.github.io/FUTURE_FS_01)
+Visit the portfolio: [https://dericndikumana.github.io/FUTURE_FS_01](https://dericportfolio.netlify.app/)
 
 ## ✨ Features
 
